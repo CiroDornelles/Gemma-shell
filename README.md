@@ -1,10 +1,10 @@
-# Gemma-shell
+# Agent
 
-Um agente de linha de comando inteligente que utiliza o Ollama com saídas estruturadas e o modelo gemma3 para gerar e executar comandos shell com base em instruções em linguagem natural.
+Este é um agente de terminal baseado em IA com saídas estruturadas usando Ollama, similar ao ShellGPT, com adição de funcionalidade TTS (text-to-speech).
 
 ## Visão Geral
 
-O Gemma-shell é uma ferramenta inspirada no [Shell GPT](https://github.com/TheR1D/shell_gpt) que permite ao usuário descrever em linguagem natural o que deseja fazer no terminal, e o agente gera e/ou executa o comando apropriado. Utiliza o poder do modelo gemma3 com saídas estruturadas do Ollama para garantir respostas consistentes e confiáveis.
+O Agent é uma ferramenta inspirada no [Shell GPT](https://github.com/TheR1D/shell_gpt) que permite ao usuário descrever em linguagem natural o que deseja fazer no terminal, e o agente gera e/ou executa o comando apropriado. Utiliza o poder do modelo gemma3 com saídas estruturadas do Ollama para garantir respostas consistentes e confiáveis. Adicionalmente, inclui funcionalidade de conversão de texto em fala (TTS) usando o Kokoro TTS.
 
 ## Recursos
 
@@ -14,6 +14,7 @@ O Gemma-shell é uma ferramenta inspirada no [Shell GPT](https://github.com/TheR
 - **Modo interativo**: Escolha entre executar, modificar, descrever ou abortar comandos
 - **Funções estruturadas**: Utiliza saídas estruturadas do Ollama para garantir respostas consistentes
 - **Suporte a múltiplas ações**: Abrir programas, executar comandos shell, listar diretórios e ler arquivos
+- **Resposta em texto e áudio (TTS)**: Integração com Kokoro TTS para converter respostas em áudio
 
 ## Instalação
 
@@ -24,41 +25,55 @@ O Gemma-shell é uma ferramenta inspirada no [Shell GPT](https://github.com/TheR
    ```
 3. Clone este repositório:
    ```bash
-   git clone https://github.com/CiroDornelles/Gemma-shell.git
-   cd Gemma-shell
+   git clone <url-do-repositorio>
+   cd agent
    ```
 4. Instale as dependências:
    ```bash
-   pip install -r requirements.txt
-   # ou se estiver usando uv:
+   # usando uv (recomendado)
    uv sync
+   ```
+   
+   Ou se preferir usar pip:
+   ```bash
+   pip install -e .
    ```
 
 ## Uso
 
 ### Modo Simples
 ```bash
-python main.py "como faço para verificar o uso de memória"
+uv run python main.py "como faço para verificar o uso de memória"
 ```
 
 ### Com Execução Automática
 ```bash
-python main.py "listar arquivos no diretório atual" --execute
+uv run python main.py "listar arquivos no diretório atual" --execute
 ```
 
 ### Com Explicação
 ```bash
-python main.py "abrir o editor kate" --explain
+uv run python main.py "abrir o editor kate" --explain
 ```
 
 ### Modo Interativo
 ```bash
-python main.py "como parar o processo com PID 1234" --interaction
+uv run python main.py "como parar o processo com PID 1234" --interaction
 ```
 
 ### Com Geração de Shell Commands
 ```bash
-python main.py "verificar espaço em disco" --shell
+uv run python main.py "verificar espaço em disco" --shell
+```
+
+### Com Resposta em Áudio (TTS)
+```bash
+uv run python tts_response.py "Explique como o ShellGPT pode ser útil para programadores"
+```
+
+### Modo Demonstração TTS
+```bash
+uv run python demo_tts.py "Explique como o ShellGPT pode ser útil para programadores"
 ```
 
 ## Opções Disponíveis
@@ -69,6 +84,8 @@ python main.py "verificar espaço em disco" --shell
 - `--interaction`: Modo interativo para escolher entre executar, modificar, descrever ou abortar
 - `--model`: Especifica o modelo Ollama a ser usado (padrão: gemma3:latest)
 - `--describe-shell, -d`: Descreve um comando shell
+- `--voice`: Voz do Kokoro TTS a ser usada (padrão: 'pf_dora')
+- `--text-only`: Apenas gera texto, sem áudio
 
 ## Funcionalidades Suportadas
 
@@ -78,6 +95,15 @@ O agente pode executar as seguintes funções com base na entrada do usuário:
 - **execute_command**: Executar comandos shell (ex: ls, ps, grep, etc.)
 - **list_directory**: Listar conteúdo de diretórios
 - **read_file**: Ler conteúdo de arquivos
+- **Text-to-Speech**: Converter respostas textuais em áudio com Kokoro TTS
+
+## Funcionalidades TTS
+
+O projeto inclui suporte para conversão de texto em fala (TTS) usando o Kokoro TTS:
+
+- Integração com o sistema de IA para converter respostas textuais em áudio
+- Vozes configuráveis
+- Reprodução direta de respostas em áudio
 
 ## Agradecimentos
 

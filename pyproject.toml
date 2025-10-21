@@ -1,9 +1,12 @@
 [project]
 name = "agent"
 version = "0.1.0"
-description = "Add your description here"
+description = "Agente de terminal baseado em IA com saídas estruturadas usando Ollama e funcionalidade TTS (text-to-speech)"
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
     "ollama>=0.6.0",
+    "kokoro>=0.9.4",
+    "numpy>=1.21.0",
+    "sounddevice>=0.4.6",
 ]

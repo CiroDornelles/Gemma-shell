@@ -1,10 +1,20 @@
-# Python-generated files
-__pycache__/
-*.py[oc]
-build/
-dist/
-wheels/
-*.egg-info
+# Arquivos temporários do editor
+*.swp
+*.swo
+*~
+.#*
 
-# Virtual environments
-.venv
+# Pasta de ambiente virtual (se estiver no projeto)
+.venv/
+
+# Arquivos de cache do Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Arquivos de cache do uv
+uv.lock
+
+# Diretório do sgpt_source (completo, já que contém outro repositório git)
+sgpt_source/
