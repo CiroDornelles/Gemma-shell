@@ -10,3 +10,6 @@ dependencies = [
     "numpy>=1.21.0",
     "sounddevice>=0.4.6",
 ]
+
+[project.scripts]
+study-partner = "study_partner:main"

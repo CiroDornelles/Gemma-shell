@@ -1,10 +1,10 @@
 # Agent
 
-Este é um agente de terminal baseado em IA com saídas estruturadas usando Ollama, similar ao ShellGPT, com adição de funcionalidade TTS (text-to-speech).
+Este é um agente de terminal baseado em IA com saídas estruturadas usando Ollama, similar ao ShellGPT, com adição de funcionalidade TTS (text-to-speech). Inclui também um parceiro de estudos com perguntas de múltipla escolha e repetição espaçada.
 
 ## Visão Geral
 
-O Agent é uma ferramenta inspirada no [Shell GPT](https://github.com/TheR1D/shell_gpt) que permite ao usuário descrever em linguagem natural o que deseja fazer no terminal, e o agente gera e/ou executa o comando apropriado. Utiliza o poder do modelo gemma3 com saídas estruturadas do Ollama para garantir respostas consistentes e confiáveis. Adicionalmente, inclui funcionalidade de conversão de texto em fala (TTS) usando o Kokoro TTS.
+O Agent é uma ferramenta inspirada no [Shell GPT](https://github.com/TheR1D/shell_gpt) que permite ao usuário descrever em linguagem natural o que deseja fazer no terminal, e o agente gera e/ou executa o comando apropriado. Utiliza o poder do modelo gemma3 com saídas estruturadas do Ollama para garantir respostas consistentes e confiáveis. Adicionalmente, inclui funcionalidade de conversão de texto em fala (TTS) usando o Kokoro TTS e um parceiro de estudos com perguntas de múltipla escolha.
 
 ## Recursos
 
@@ -15,6 +15,7 @@ O Agent é uma ferramenta inspirada no [Shell GPT](https://github.com/TheR1D/she
 - **Funções estruturadas**: Utiliza saídas estruturadas do Ollama para garantir respostas consistentes
 - **Suporte a múltiplas ações**: Abrir programas, executar comandos shell, listar diretórios e ler arquivos
 - **Resposta em texto e áudio (TTS)**: Integração com Kokoro TTS para converter respostas em áudio
+- **Parceiro de Estudos**: Sistema de perguntas e respostas com múltipla escolha, reformulação de perguntas para evitar monotonia e algoritmo de repetição espaçada (SM-2)
 
 ## Instalação
 
@@ -61,11 +62,6 @@ uv run python main.py "abrir o editor kate" --explain
 uv run python main.py "como parar o processo com PID 1234" --interaction
 ```
 
-### Com Geração de Shell Commands
-```bash
-uv run python main.py "verificar espaço em disco" --shell
-```
-
 ### Com Resposta em Áudio (TTS)
 ```bash
 uv run python tts_response.py "Explique como o ShellGPT pode ser útil para programadores"
@@ -76,8 +72,51 @@ uv run python tts_response.py "Explique como o ShellGPT pode ser útil para prog
 uv run python demo_tts.py "Explique como o ShellGPT pode ser útil para programadores"
 ```
 
+### Parceiro de Estudos
+```bash
+# Usando o script de execução
+uv run python run_study_partner.py
+
+# Ou carregando um arquivo de perguntas específico
+uv run python run_study_partner.py --question-file meu_questionario.json
+
+# Apenas texto (sem áudio)
+uv run python run_study_partner.py --text-only
+```
+
+### Comando direto para o parceiro de estudos
+```bash
+# Se instalado como pacote
+study-partner --question-file sample_questions.json
+```
+
+## Parceiro de Estudos - Funcionalidades
+
+O parceiro de estudos inclui:
+
+- **Reformulação de perguntas**: Cada pergunta é reformulada de forma diferente para evitar monotonia
+- **Múltipla escolha**: Cada pergunta vem com 4 opções (1 correta + 3 distratores gerados pela IA)
+- **Repetição espaçada (SM-2)**: Algoritmo que ajuda a otimizar o aprendizado com base na repetição espaçada
+- **Experiência com áudio**: Perguntas e opções são lidas em áudio usando o Kokoro TTS
+- **Acompanhamento de progresso**: Contabiliza acertos e fornece estatísticas da sessão
+
+### Formato do arquivo de perguntas (JSON)
+```json
+[
+  {
+    "question": "Qual é a capital do Brasil?",
+    "answer": "Brasília"
+  },
+  {
+    "question": "Qual é a fórmula química da água?",
+    "answer": "H2O"
+  }
+]
+```
+
 ## Opções Disponíveis
 
+### Para o agente principal:
 - `--shell, -s`: Gera e executa comandos shell
 - `--execute, -e`: Executa comandos automaticamente
 - `--explain, -x`: Explica o comando gerado
@@ -86,6 +125,12 @@ uv run python demo_tts.py "Explique como o ShellGPT pode ser útil para programa
 - `--describe-shell, -d`: Descreve um comando shell
 - `--voice`: Voz do Kokoro TTS a ser usada (padrão: 'pf_dora')
 - `--text-only`: Apenas gera texto, sem áudio
+
+### Para o parceiro de estudos:
+- `--question-file`: Caminho para arquivo JSON com perguntas e respostas
+- `--model`: Modelo Ollama a ser usado (padrão: gemma3:latest)
+- `--voice`: Voz do Kokoro TTS a ser usada (padrão: 'pf_dora')
+- `--text-only`: Apenas texto, sem áudio
 
 ## Funcionalidades Suportadas
 
@@ -96,6 +141,7 @@ O agente pode executar as seguintes funções com base na entrada do usuário:
 - **list_directory**: Listar conteúdo de diretórios
 - **read_file**: Ler conteúdo de arquivos
 - **Text-to-Speech**: Converter respostas textuais em áudio com Kokoro TTS
+- **Study Partner**: Sessões de estudo com perguntas de múltipla escolha e repetição espaçada
 
 ## Funcionalidades TTS
 
@@ -112,6 +158,19 @@ Este projeto foi fortemente inspirado no [Shell GPT](https://github.com/TheR1D/s
 ## Contribuindo
 
 Contribuições são bem-vindas! Por favor, sinta-se à vontade para abrir issues e pull requests.
+
+## Bash Aliases
+
+Para facilitar o uso do sistema, criamos um conjunto de aliases Bash que cobrem todas as funcionalidades. Para usá-los:
+
+1. O arquivo de aliases está localizado em `agent_aliases.sh`
+2. Adicione ao seu `~/.bashrc` ou `~/.zshrc`:
+   ```bash
+   source /home/ciro/Documentos/scripts/agent/agent_aliases.sh
+   ```
+3. Recarregue seu shell: `source ~/.bashrc`
+
+Consulte o arquivo `ALIASES_DOCS.md` para uma lista completa de aliases disponíveis e exemplos de uso.
 
 ## Licença
 

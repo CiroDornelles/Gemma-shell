@@ -1,0 +1,68 @@
+{
+  "general_knowledge": [
+    {
+      "question": "Qual é a capital do Brasil?",
+      "answer": "Brasília"
+    },
+    {
+      "question": "Quantos continentes existem no mundo?",
+      "answer": "6"
+    },
+    {
+      "question": "Qual é o maior planeta do sistema solar?",
+      "answer": "Júpiter"
+    },
+    {
+      "question": "Quantos elementos químicos existem na tabela periódica padrão?",
+      "answer": "118"
+    },
+    {
+      "question": "Qual é o rio mais longo do mundo?",
+      "answer": "Rio Nilo"
+    }
+  ],
+  "science": [
+    {
+      "question": "Qual é a fórmula química da água?",
+      "answer": "H2O"
+    },
+    {
+      "question": "Qual é o menor osso do corpo humano?",
+      "answer": "Estribo"
+    },
+    {
+      "question": "Qual é a velocidade da luz no vácuo?",
+      "answer": "299.792.458 metros por segundo"
+    },
+    {
+      "question": "Quantos cromossomos tem um ser humano normal?",
+      "answer": "46"
+    },
+    {
+      "question": "Qual é o elemento mais abundante no universo?",
+      "answer": "Hidrogênio"
+    }
+  ],
+  "history": [
+    {
+      "question": "Em que ano começou a Segunda Guerra Mundial?",
+      "answer": "1939"
+    },
+    {
+      "question": "Quem foi o primeiro imperador do Brasil?",
+      "answer": "Dom Pedro I"
+    },
+    {
+      "question": "Em que ano foi proclamada a independência do Brasil?",
+      "answer": "1822"
+    },
+    {
+      "question": "Quem foi o líder do movimento da independência dos Estados Unidos?",
+      "answer": "George Washington"
+    },
+    {
+      "question": "Qual foi a primeira civilização conhecida da história?",
+      "answer": "Civilização Mesopotâmica"
+    }
+  ]
+}
